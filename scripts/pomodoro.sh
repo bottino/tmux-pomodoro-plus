@@ -454,6 +454,7 @@ pomodoro_status() {
 			pomodoro_status="waiting_for_break"
 			set_status "$pomodoro_status"
 			send_notification "🍅 Pomodoro completed!" "Start the break now?"
+      tmux display-popup "echo '🍅 Pomodoro completed!'"
 			return 0
 		fi
 
@@ -468,6 +469,7 @@ pomodoro_status() {
 
 	# Breaks are disabled
 	if [ "$pomodoro_completed" = true ] && [ "$pomodoro_status" == "in_progress" ] && [ "$disable_breaks" == "on" ]; then
+
 		remove_time_paused_file
 
 		if prompt_user; then
